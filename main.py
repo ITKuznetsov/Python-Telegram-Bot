@@ -1,5 +1,5 @@
 from bot.utils.bot_initializer import BotInitializer
-from config import BotConfig
+from config.config import BotConfig
 from bot.handlers.menu_handler import MenuHandler
 
 def main():
