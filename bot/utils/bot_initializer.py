@@ -1,10 +1,11 @@
-import telebot
+from telebot import TeleBot
 from bot.handlers.command_handler import CommandHandler
 from bot.handlers.menu_handler import MenuHandler
 
+
 class BotInitializer:
     def __init__(self, token, commands):
-        self.bot = telebot.TeleBot(token)
+        self.bot = TeleBot(token)
         self.commands = commands
         self.command_handler = CommandHandler(self.bot, self.commands)
         self.register_handlers()

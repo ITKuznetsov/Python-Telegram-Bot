@@ -1,5 +1,6 @@
 from telebot import types
 
+
 class MenuHandler:
     @staticmethod
     def create_menu(buttons, row_width=2):
