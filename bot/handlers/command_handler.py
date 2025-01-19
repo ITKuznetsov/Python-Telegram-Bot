@@ -1,4 +1,8 @@
+from sqlmodel import Session, select
+from bot.database.engine import engine
+from bot.models import User
 from bot.handlers.file_handler import FileHandler
+
 
 class CommandHandler:
     def __init__(self, bot, commands):
@@ -19,6 +23,14 @@ class CommandHandler:
                     self.bot.send_message(message.from_user.id, "Держись, меняю меню!", reply_markup=data['menu'])
             else:
                 self.bot.send_message(message.from_user.id, 'Неизвестная команда.')
+
+            with Session(engine) as session:
+                statement = select(User).where(User.chat_id == message.from_user.id)
+                user = session.exec(statement).first()
+                if not user:
+                    new_user = User(chat_id=message.from_user.id)
+                    session.add(new_user)
+                    session.commit()
         except Exception as e:
             print(f"Ошибка: {e}")
             self.bot.send_message(message.from_user.id, 'Произошла ошибка. Пожалуйста, попробуйте снова.')
