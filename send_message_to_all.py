@@ -4,6 +4,7 @@ from config.config import BotConfig
 from bot.models import User
 from bot.database.engine import engine
 
+
 def send_message_to_all():
     config = BotConfig()
     bot_initializer = BotInitializer(config.token, {})
